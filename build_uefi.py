@@ -196,6 +196,10 @@ def compile_boot_shim (boot_shim_config: dict, fd_config: dict) -> bool:
         f"FD_SIZE={fd_size}"
     ]
 
+    payload_base = boot_shim_config.get ("payload_base")
+    if payload_base is not None:
+        cmd.append (f"PAYLOAD_BASE={hex (payload_base)}")
+
     # Compile Boot Shim
     return subprocess.run (cmd, cwd=BOOT_SHIM_PATH).returncode == 0
 
